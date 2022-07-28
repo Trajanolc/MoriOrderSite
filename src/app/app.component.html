@@ -1,10 +1,11 @@
 <div class="container-fluid">
-  <div class="row flex-nowrap">
+  <div class="d-flex">
     <div class="col-auto px-2 py-2">
-    <app-side-bar></app-side-bar>
-  </div>
-  <div class="col p-4">
-    <app-principal></app-principal>
-  </div>
+      <app-side-bar (event)="getOrdersFromAPI($event)"></app-side-bar>
+    </div>
+    <div class="col-9 align-self-center">
+      <app-principal
+      [orderList]="orderList"></app-principal>
+    </div>
   </div>
 </div>

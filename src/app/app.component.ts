@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { SideBarComponent } from './side-bar/side-bar.component';
+import { Order } from './order';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'test-list';
+
+  @ViewChild(SideBarComponent, { static: false })
+  sidebar!: SideBarComponent;
+
+  orderList: Order[] = [];
+
+  getOrdersFromAPI($event: Order[]) {
+    this.orderList = $event
+  }
+
+
 }

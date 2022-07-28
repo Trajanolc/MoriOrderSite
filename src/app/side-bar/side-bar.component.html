@@ -1,42 +1,26 @@
 <div
   class="d-flex flex-column align-items-sm-start px-3 pt-3 text-white min-vh-100 rounded"
 >
-
-  <span class="fs-2 d-none d-sm-inline pt-3 pb-2 align-middle mx-auto">Mori Engenharia</span>
-
-  <span class="fs-7 d-none d-sm-inline pt-0 pb-1 align-middle mx-auto">Controle de Ordens de Refrigeração</span>
-  <hr/>
-  <ul
-    class="nav nav-pills flex-column mb-sm-auto mb-0"
-    id="menu"
+  <span class="fs-2 d-none d-sm-inline pt-3 pb-2 align-middle mx-auto"
+    >Mori Engenharia</span
   >
-    <li class="nav-item">
-      <a href="#" class="nav-link align-middle px-2">
-        <i class="fs-3 bi-house-door-fill"></i>
-        <span class="ms-1 d-none d-sm-inline text-white">Home</span>
-      </a>
-    </li>
 
-    <li>
-      <a
-        href="#"
-        data-bs-toggle="collapse"
-        class="nav-link px-2 align-middle"
-      >
-        <i class="fs-4 bi-calendar3"></i>
-        <span class="ms-2 d-none d-sm-inline text-white">Ordens No Mês</span>
-      </a>
-    </li>
-
-    <! -----------------------------------inicicio lista de funcionarios-------------------------- >
+  <span class="fs-7 d-none d-sm-inline pt-0 pb-1 align-middle mx-auto"
+    >Controle de Ordens de Refrigeração</span
+  >
+  <hr />
+  <ul class="nav nav-pills flex-column mb-sm-auto mb-0" id="menu">
+    <!-------------------------Ordens no mes---------------------------------------->
     <li>
       <a
         href="#submenu1"
         data-bs-toggle="collapse"
         class="nav-link px-2 align-middle"
       >
-        <i class="fs-4 bi-people"></i>
-        <span class="ms-2 d-none d-sm-inline text-white me-5">Ordens por Funcionário</span>
+        <i class="fs-3 bi-calendar3"></i>
+        <span class="ms-2 d-none d-sm-inline text-white me-5"
+          >Ordens por Mês</span
+        >
       </a>
       <ul
         class="collapse nav flex-column ms-1"
@@ -44,24 +28,73 @@
         data-bs-parent="#menu"
       >
         <li class="w-100">
-          <a href="#" class="nav-link px-2 text-white">
-            <span class="d-none d-sm-inline">Product</span> 1</a
+          <button
+            (click)="getOrders('orders/')"
+            class="nav-link px-4 text-white w-100 text-start"
           >
+            Atual
+          </button>
         </li>
         <li>
-          <a href="#" class="nav-link px-2 text-white">
-            <span class="d-none d-sm-inline">Product</span> 2</a
+          <button
+            (click)="getOrders('orders/Anterior')"
+            class="nav-link px-4 text-white w-100 text-start"
+            disabled
           >
+            Anterior
+          </button>
+        </li>
+      </ul>
+    </li>
+
+    <! -----------------------------------inicicio lista de funcionarios-------------------------- >
+    <li>
+      <a
+        href="#submenu2"
+        data-bs-toggle="collapse"
+        class="nav-link px-2 align-middle"
+      >
+        <i class="fs-4 bi-people"></i>
+        <span class="ms-2 d-none d-sm-inline text-white me-5"
+          >Ordens por Funcionário</span
+        >
+      </a>
+      <ul
+        class="collapse nav flex-column ms-1"
+        id="submenu2"
+        data-bs-parent="#menu"
+      >
+        <li class="w-100">
+          <button
+            (click)="getOrders('month/thalisson')"
+            class="nav-link px-4 text-white w-100 text-start"
+          >
+            thalisson
+          </button>
         </li>
         <li>
-          <a href="#" class="nav-link px-2 text-white">
-            <span class="d-none d-sm-inline">Product</span> 3</a
+          <button
+            (click)="getOrders('month/matheus')"
+            class="nav-link px-4 text-white w-100 text-start"
           >
+            matheus
+          </button>
         </li>
         <li>
-          <a href="#" class="nav-link px-2 text-white">
-            <span class="d-none d-sm-inline">Product</span> 4</a
+          <button
+            (click)="getOrders('month/geronildo')"
+            class="nav-link px-4 text-white w-100 text-start"
           >
+            geronildo
+          </button>
+        </li>
+        <li>
+          <button
+            (click)="getOrders('month/elias')"
+            class="nav-link px-4 text-white w-100 text-start"
+          >
+            elias
+          </button>
         </li>
       </ul>
     </li>
@@ -70,37 +103,35 @@
     <!--------------------------inicio por empresa------------------------------------->
     <li>
       <a
-        href="#submenu2"
+        href="#submenu3"
         data-bs-toggle="collapse"
         class="nav-link px-2 align-middle"
       >
         <i class="fs-4 bi-building"></i>
-        <span class="ms-2 d-none d-sm-inline text-white">Ordens por Empresa</span>
+        <span class="ms-2 d-none d-sm-inline text-white"
+          >Ordens por Empresa</span
+        >
       </a>
       <ul
         class="collapse nav flex-column ms-1"
-        id="submenu2"
+        id="submenu3"
         data-bs-parent="#menu"
       >
         <li class="w-100">
-          <a href="#" class="nav-link px-2 text-white">
-            <span class="d-none d-sm-inline">Product</span> 1</a
+          <button
+            (click)="getOrders('month/equatorial')"
+            class="nav-link px-4 text-white w-100 text-start"
+            disabled
           >
-        </li>
-        <li>
-          <a href="#" class="nav-link px-2 text-white">
-            <span class="d-none d-sm-inline">Product</span> 2</a
+            Equatorial
+          </button>
+          <button
+            (click)="getOrders('month/agropalma')"
+            class="nav-link px-4 text-white w-100 text-start"
+            disabled
           >
-        </li>
-        <li>
-          <a href="#" class="nav-link px-2 text-white">
-            <span class="d-none d-sm-inline">Product</span> 3</a
-          >
-        </li>
-        <li>
-          <a href="#" class="nav-link px-2 text-white">
-            <span class="d-none d-sm-inline">Product</span> 4</a
-          >
+            Agropalma
+          </button>
         </li>
       </ul>
     </li>
