@@ -1,79 +1,150 @@
 <div class="d-flex justify-content-center">
-    <div class="overflow-auto">
-      <table
-        class="table table-bordered table-striped table-hover table-responsive"
-      >
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Data</th>
-            <th scope="col">PAT</th>
-            <th scope="col">Equipamento</th>
-            <th scope="col">Funcionário</th>
-            <th scope="col">Manutencões</th>
-            <th scope="col">Serviços</th>
-            <th scope="col">Trocas</th>
-            <th scope="col">Fotos Antes</th>
-            <th scope="col">Fotos Depois</th>
-            <th scope="col">OBS</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let order of orderList">
-            <th scope="row">{{ order.ordemID }}</th>
-            <td>{{ order.dataFim }}</td>
-            <td>{{ order.pat }}</td>
-            <td>{{ order.instalacao + ' - ' + order.local + ' - ' + order.equipamento}}</td>
-            <td>{{ order.funcionarioID }}</td>
-            <td>
-              <li class="list-group-item" *ngFor="let manut of order.tipoManut">
-                {{ manut }}<br /><br />
-              </li>
-            </td>
-            <td>
-              <li
-                class="list-group-item"
-                *ngFor="let servico of order.tipoServicos"
-              >
-                {{ servico }}<br /><br />
-              </li>
-            </td>
-            <td>
-              <li class="list-group-item" *ngFor="let troca of order.tipoTroca">
-                {{ troca }}<br /><br />
-              </li>
-            </td>
-            <td>
-              <li
-                class="list-group-item image"
-                *ngFor="let image of order.fotosAntes"
-              >
-                <img
-                  [src]="urlS3 + image"
-                  width="64"
-                  height="64"
-                  onerror="this.src='assets/nope-not-here.webp'"
-                  (click)="goToLink(urlS3 + image)"
-                />
-              </li>
-            </td>
-            <td>
-              <li
-                class="list-group-item image"
-                *ngFor="let image of order.fotosDepois"
-              >
-                <img
-                  [src]="urlS3 + image"
-                  width="64"
-                  height="64"
-                  onerror="this.src='assets/nope-not-here.webp'"
-                  (click)="goToLink(urlS3 + image)"
-                />
-              </li>
-            </td>
-            <td>{{ order.obs }}</td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="container">
+    <div *ngIf="orderList.length > 0; else helloBlock">
+      <p class="top-left py-5 px-3 fs-2">
+        Numero de Ordens: {{ orderList.length }}
+      </p>
+      <div class="overflow-auto">
+        <table
+          class="table table-bordered table-striped table-hover table-responsive"
+        >
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Data</th>
+              <th scope="col">PAT</th>
+              <th scope="col">Equipamento</th>
+              <th scope="col">Funcionário</th>
+              <th scope="col">Manutencões</th>
+              <th scope="col">Serviços</th>
+              <th scope="col">Trocas</th>
+              <th scope="col">Fotos Antes</th>
+              <th scope="col">Fotos Depois</th>
+              <th scope="col">OBS</th>
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of orderList">
+              <th scope="row">
+                <div id="orderID">{{ order.ordemID }}</div>
+              </th>
+              <td>{{ calendarService.getFormatedDate(order.dataFim) }}</td>
+              <td style="min-width: 130px">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    id="PAT - {{ order.ordemID }}"
+                    [defaultValue]="order.pat"
+                  />
+                </div>
+              </td>
+              <td>
+                {{
+                  order.instalacao +
+                    " - " +
+                    order.local +
+                    " - " +
+                    order.equipamento
+                }}
+              </td>
+              <td style="min-width: 100px">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    id="employee - {{ order.ordemID }}"
+                    [defaultValue]="order.funcionarioID"
+                  />
+                </div>
+              </td>
+              <td>
+                <li
+                  class="list-group-item"
+                  *ngFor="let manut of order.tipoManut"
+                >
+                  {{ manut }}<br /><br />
+                </li>
+              </td>
+              <td>
+                <li
+                  class="list-group-item"
+                  *ngFor="let servico of order.tipoServicos"
+                >
+                  {{ servico }}<br /><br />
+                </li>
+              </td>
+              <td>
+                <li
+                  class="list-group-item"
+                  *ngFor="let troca of order.tipoTroca"
+                >
+                  {{ troca }}<br /><br />
+                </li>
+              </td>
+              <td>
+                <li
+                  class="list-group-item image"
+                  *ngFor="let image of order.fotosAntes"
+                >
+                  <img
+                    [src]="urlS3 + image"
+                    width="64"
+                    height="64"
+                    onerror="this.src=''"
+                    (click)="goToLink(urlS3 + image)"
+                  />
+                </li>
+              </td>
+              <td>
+                <li
+                  class="list-group-item image"
+                  *ngFor="let image of order.fotosDepois"
+                >
+                  <img
+                    [src]="urlS3 + image"
+                    width="64"
+                    height="64"
+                    onerror="this.src=''"
+                    (click)="goToLink(urlS3 + image)"
+                  />
+                </li>
+              </td>
+              <td style="min-width: 200px">
+                <div class="form-group">
+                  <textarea
+                    class="form-control form-control-sm"
+                    id="OBS - {{ order.ordemID }}"
+                    [defaultValue]="order.obs"
+                  ></textarea>
+                </div>
+              </td>
+              <td>
+                <div class="d-flex justify-content-center flex-column">
+                  <button
+                    (click)="updateOrder(order)"
+                    class="btn btn-outline-secondary p-2"
+                    type="button "
+                  >
+                    Atualizar
+                  </button>
+
+                  <!--<br />
+                    <button class="btn btn-outline-danger p-2" type="button">
+                    Excluir
+                  </button> -->
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+  </div>
+  <ng-template #helloBlock>
+    <p class="top-left p-2 fs-1">Bem vindo!</p>
+    <br />
+    <span class="top-left p-2 fs-2"> Por favor, selecione um filtro.</span>
+  </ng-template>
 </div>

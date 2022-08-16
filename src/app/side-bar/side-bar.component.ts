@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { GetOrdersDataService } from '../get-orders-data.service';
-import { Order } from '../order';
+import { OrdersDataService } from '../services/get-orders-data.service';
+import { Order } from '../entities/order';
 import { Observable, of } from 'rxjs';
 
 @Component({
@@ -11,16 +11,18 @@ import { Observable, of } from 'rxjs';
 export class SideBarComponent implements OnInit {
   orderList: Order[] = [];
 
-  constructor(private getOrdersDataService: GetOrdersDataService) {}
+  constructor(private OrdersDataService: OrdersDataService) {}
 
   ngOnInit(): void {}
 
   @Output() event = new EventEmitter<Order[]>();
 
   getOrders(path: string) {
-    this.getOrdersDataService.getFromAPI(path).subscribe((orders) => {
+    this.OrdersDataService.getFromAPI(path).subscribe((orders) => {
       this.orderList = orders;
       this.event.emit(this.orderList)
     });
   }
+
+
 }

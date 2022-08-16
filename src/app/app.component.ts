@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { SideBarComponent } from './side-bar/side-bar.component';
-import { Order } from './order';
+import { Order } from './entities/order';
 
 @Component({
   selector: 'app-root',
