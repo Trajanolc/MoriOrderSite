@@ -3,9 +3,11 @@
     <div class="col-auto px-2 py-2">
       <app-side-bar (event)="getOrdersFromAPI($event)"></app-side-bar>
     </div>
+
     <div class="col-9 align-self-center">
       <app-principal
       [orderList]="orderList"></app-principal>
     </div>
   </div>
+
 </div>

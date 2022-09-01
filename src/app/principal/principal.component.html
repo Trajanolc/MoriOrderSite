@@ -1,5 +1,40 @@
 <div class="d-flex justify-content-center">
   <div class="container">
+    <dialog id="login-dialog">
+      <div class="bg-light text-dark">
+        <form method="dialog">
+          <p class="text fs-5 ">Usuário não autenticado</p>
+          <p class="text fs-7 pb-1">Por favor, realize o login.</p>
+          <p>
+            <label
+              >Login:
+              <input type="text" class="form-control form-control-sm" />
+            </label>
+          </p>
+          <p>
+            <label
+              >Senha:
+              <input type="password" class="form-control form-control-sm" />
+            </label>
+          </p>
+          <div class="d-flex justify-content-center aling-items-right">
+            <button value="cancel" class="btn btn-outline-danger p-2 mx-1">
+              Cancelar
+            </button>
+            <button
+              id="confirmBtn"
+              class="btn btn-success p-2 mx-1"
+              value="default"
+            >
+              Confirmar
+            </button>
+          </div>
+        </form>
+      </div>
+    </dialog>
+
+    <output></output>
+
     <div *ngIf="orderList.length > 0; else helloBlock">
       <p class="top-left py-5 px-3 fs-2">
         Numero de Ordens: {{ orderList.length }}

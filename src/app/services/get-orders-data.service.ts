@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Order } from '../entities/order';
+import { Credentials } from '../entities/credentials';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
 
@@ -10,8 +11,8 @@ import { environment } from 'src/environments/environment';
 })
 export class OrdersDataService {
 
-  private url = 'http://moriapi-env.eba-4vryvnng.us-east-2.elasticbeanstalk.com/';
-  //private url = 'http://localhost:8080/';
+  //private url = 'http://moriapi-env.eba-4vryvnng.us-east-2.elasticbeanstalk.com/';
+  private url = 'http://localhost:8080/';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -19,12 +20,17 @@ export class OrdersDataService {
      return this.httpClient.get<Order[]>(this.url+path);
   }
 
-  updateOrder(order: Order){
+  updateOrder(order: Order, credentials:Credentials){
 
     let payload = JSON.stringify(order);
     let header = new HttpHeaders().set('content-type', 'application/json');
-    console.log(payload);
+    header.set('authorization', 'Basic ' + (credentials.username + ':' + credentials.password))
+
 
     return this.httpClient.patch(this.url+"orders",payload,{'headers':header,'observe':'response'});
+  }
+
+  checkUser(){
+
   }
 }
